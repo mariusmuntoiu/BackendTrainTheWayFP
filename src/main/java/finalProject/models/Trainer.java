@@ -20,7 +20,7 @@ public class Trainer {
     private Calendar birthDate;
     private long phoneNumber;
 
-    public Trainer() {
+    protected Trainer() {
     }
 
     public Trainer(long trainerID,
@@ -94,5 +94,18 @@ public class Trainer {
 
     public void setPhoneNumber(long phoneNumber) {
         this.phoneNumber = phoneNumber;
+    }
+
+    @Override
+    public String toString() {
+        return "Trainer{" +
+                "trainerID=" + trainerID +
+                ", firstName='" + firstName + '\'' +
+                ", lastName='" + lastName + '\'' +
+                ", gender='" + gender + '\'' +
+                ", email='" + email + '\'' +
+                ", birthDate=" + birthDate +
+                ", phoneNumber=" + phoneNumber +
+                '}';
     }
 }
