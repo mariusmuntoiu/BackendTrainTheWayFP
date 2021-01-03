@@ -1,62 +1,67 @@
 package finalProject.controller;
 
-import finalProject.repository.TrainerRepo;
+import finalProject.repository.TrainerRepository;
 import finalProject.errors.ResourceNotFoundException;
 import finalProject.models.Trainer;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-@CrossOrigin(origins = "http://localhost:4200")
-@RequestMapping(value = "")
+@RequestMapping("")
 @RestController
+@CrossOrigin(origins = "*")
 public class TrainerController {
 
     @Autowired
-    private TrainerRepo trainerRepository;
+     private TrainerRepository trainerRepository;
 
     @GetMapping("/trainer")
     public List<Trainer> getAllTrainers() {
         return trainerRepository.findAll();
     }
 
-    @GetMapping("/users/{id}")
-    public ResponseEntity<Trainer> findTrainerById(@PathVariable(value = "id") Long trainerId)
+    @GetMapping("/trainer/{trainerID}")
+    public ResponseEntity<Trainer> findTrainerById(@PathVariable(value = "trainerID") Long trainerId)
             throws ResourceNotFoundException {
         Trainer trainer = trainerRepository.findById(trainerId)
                 .orElseThrow(() -> new ResourceNotFoundException("Trainer not found for this id ::" + trainerId));
         return ResponseEntity.ok().body(trainer);
     }
 
-    //TODO: @Valid annotation should be here but cannot add it.
     @PostMapping("/trainer")
-    public Trainer createTrainer(@Validated @RequestBody Trainer trainer) {
-        return trainerRepository.save(trainer);
+    public Trainer addTrainer(@Valid @RequestBody Trainer trainer) {
+         trainerRepository.save(trainer);
+         return trainer;
     }
 
-    @PutMapping("/trainer/{id}")
-    public ResponseEntity<Trainer> updateTrainer(@PathVariable(value = "id")Long trainerId,
-                                                 @Validated @RequestBody Trainer trainerDetails)
+   // //TODO: @Valid annotation should be here but cannot add it(FIXED).
+    //  @PostMapping("/trainer")
+    //  public Trainer createTrainer(@Valid @RequestBody Trainer trainer) {
+    // return trainerRepository.save(trainer);
+   // }
+
+    @PutMapping("/trainer/{trainerID}")
+    public ResponseEntity<Trainer> updateTrainer(@PathVariable(value = "trainerID")Long trainerId,
+                                                 @Valid @RequestBody Trainer trainerDetails)
             throws ResourceNotFoundException {
         Trainer trainer = trainerRepository.findById(trainerId)
                 .orElseThrow(() -> new ResourceNotFoundException("Trainer not found for this id ::" + trainerId));
-        trainer.setFirstName(trainerDetails.getFirstName());
-        trainer.setLastName(trainerDetails.getLastName());
-        trainer.setGender(trainerDetails.getGender());
-        trainer.setBirthDate(trainerDetails.getBirthDate());
+        trainer.setTrainerID(trainerDetails.getTrainerID());
+        trainer.setName(trainerDetails.getName());
+        trainer.setAge(trainerDetails.getAge());
+        trainer.setGym(trainerDetails.getGym());
         trainer.setEmail(trainerDetails.getEmail());
-        trainer.setPhoneNumber(trainerDetails.getPhoneNumber());
         final Trainer updatedTrainer = trainerRepository.save(trainer);
         return ResponseEntity.ok(updatedTrainer);
     }
 
-    @DeleteMapping("/trainer/{id}")
-    public Map<String, Boolean> deleteTrainer(@PathVariable(value = "id") Long trainerId)
+    @DeleteMapping("/trainer/{trainerID}")
+    public Map<String, Boolean> deleteTrainer(@PathVariable(value = "trainerID") Long trainerId)
             throws ResourceNotFoundException {
         Trainer trainer = trainerRepository.findById(trainerId)
                 .orElseThrow(() -> new ResourceNotFoundException("Trainer not found for this id ::" + trainerId));

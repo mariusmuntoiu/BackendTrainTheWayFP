@@ -13,32 +13,29 @@ public class Trainer {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private long trainerID;
 
-    private String firstName;
-    private String lastName;
-    private String gender;
+    private String name;
+    private String gym;
     private String email;
-    private Calendar birthDate;
-    private long phoneNumber;
+    private long age;
+
 
     protected Trainer() {
     }
 
     public Trainer(long trainerID,
-                   String firstName,
-                   String lastName,
-                   String gender,
+                   String name,
+                   String gym,
                    String email,
-                   Calendar birthDate,
-                   long phoneNumber) {
-
-        this.trainerID = trainerID;
-        this.firstName = firstName;
-        this.lastName = lastName;
-        this.gender = gender;
+                   long age) {
+        this.age = age;
+        this.name = name;
         this.email = email;
-        this.birthDate = birthDate;
-        this.phoneNumber = phoneNumber;
+        this.trainerID = trainerID;
+        this.gym = gym;
+
     }
+
+
 
     public long getTrainerID() {
         return trainerID;
@@ -48,28 +45,20 @@ public class Trainer {
         this.trainerID = trainerID;
     }
 
-    public String getFirstName() {
-        return firstName;
+    public String getName() {
+        return name;
     }
 
-    public void setFirstName(String firstName) {
-        this.firstName = firstName;
+    public void setName(String name) {
+        this.name = name;
     }
 
-    public String getLastName() {
-        return lastName;
+    public String getGym() {
+        return gym;
     }
 
-    public void setLastName(String lastName) {
-        this.lastName = lastName;
-    }
-
-    public String getGender() {
-        return gender;
-    }
-
-    public void setGender(String gender) {
-        this.gender = gender;
+    public void setGym(String gym) {
+        this.gym = gym;
     }
 
     public String getEmail() {
@@ -80,32 +69,29 @@ public class Trainer {
         this.email = email;
     }
 
-    public Calendar getBirthDate() {
-        return birthDate;
+
+    public long getAge() {
+        return age;
     }
 
-    public void setBirthDate(Calendar birthDate) {
-        this.birthDate = birthDate;
-    }
-
-    public long getPhoneNumber() {
-        return phoneNumber;
-    }
-
-    public void setPhoneNumber(long phoneNumber) {
-        this.phoneNumber = phoneNumber;
+    public void setAge(long age) {
+        this.age = age;
     }
 
     @Override
     public String toString() {
         return "Trainer{" +
                 "trainerID=" + trainerID +
-                ", firstName='" + firstName + '\'' +
-                ", lastName='" + lastName + '\'' +
-                ", gender='" + gender + '\'' +
+                ", name='" + name + '\'' +
+                ", gym='" + gym + '\'' +
                 ", email='" + email + '\'' +
-                ", birthDate=" + birthDate +
-                ", phoneNumber=" + phoneNumber +
+                ", age=" + age +
                 '}';
     }
+
 }
+
+
+
+
+
