@@ -1,22 +1,27 @@
 package finalProject.models;
 
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 import java.util.Calendar;
 
 @Entity
 public class Trainer {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
+
+    @Column
     private long trainerID;
 
+    @Column
     private String name;
+    @Column
     private String gym;
+    @Column
     private String email;
+    @Column
     private long age;
+
+
 
 
     protected Trainer() {

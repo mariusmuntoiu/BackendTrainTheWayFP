@@ -12,9 +12,9 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-@RequestMapping("")
+@RequestMapping("/")
 @RestController
-@CrossOrigin(origins = "*")
+@CrossOrigin(origins = "http://localhost:4200")
 public class TrainerController {
 
     @Autowired
@@ -26,10 +26,12 @@ public class TrainerController {
     }
 
     @GetMapping("/trainer/{trainerID}")
-    public ResponseEntity<Trainer> findTrainerById(@PathVariable(value = "trainerID") Long trainerId)
+    public ResponseEntity<Trainer> findTrainerById(
+            @PathVariable(value = "trainerID") Long trainerId)
             throws ResourceNotFoundException {
         Trainer trainer = trainerRepository.findById(trainerId)
-                .orElseThrow(() -> new ResourceNotFoundException("Trainer not found for this id ::" + trainerId));
+                .orElseThrow(() -> new ResourceNotFoundException(
+                        "Trainer not found for this id ::" + trainerId));
         return ResponseEntity.ok().body(trainer);
     }
 
@@ -45,12 +47,12 @@ public class TrainerController {
     // return trainerRepository.save(trainer);
    // }
 
-    @PutMapping("/trainer/{trainerID}")
-    public ResponseEntity<Trainer> updateTrainer(@PathVariable(value = "trainerID")Long trainerId,
+    @PutMapping("/trainer")
+    public ResponseEntity<Trainer> updateTrainer(
                                                  @Valid @RequestBody Trainer trainerDetails)
             throws ResourceNotFoundException {
-        Trainer trainer = trainerRepository.findById(trainerId)
-                .orElseThrow(() -> new ResourceNotFoundException("Trainer not found for this id ::" + trainerId));
+        Trainer trainer = trainerRepository.findById(trainerDetails.getTrainerID())
+                .orElseThrow(() -> new ResourceNotFoundException("Trainer not found for this id ::" + trainerDetails.getTrainerID()));
         trainer.setTrainerID(trainerDetails.getTrainerID());
         trainer.setName(trainerDetails.getName());
         trainer.setAge(trainerDetails.getAge());

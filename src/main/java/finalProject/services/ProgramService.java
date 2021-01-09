@@ -1,4 +1,4 @@
-package finalProject.service;
+package finalProject.services;
 
 public class ProgramService {
 }

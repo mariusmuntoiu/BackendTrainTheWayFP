@@ -5,12 +5,14 @@ import javax.persistence.*;
 @Entity
 public class Program {
     @Id
+    @GeneratedValue
     private long programID;
 
     private String name;
     private String category;
     private String description;
     @ManyToOne
+    @JoinColumn(name ="trainerID")
     private Trainer trainer;
 
     public Program() {
