@@ -2,7 +2,9 @@ package finalProject.models;
 
 
 import javax.persistence.*;
-import java.util.Calendar;
+import java.util.HashSet;
+import java.util.Set;
+
 
 @Entity
 public class Trainer {
@@ -20,6 +22,9 @@ public class Trainer {
     private String email;
     @Column
     private long age;
+
+    @ManyToMany(mappedBy = "trainerLs")
+    private Set<Course> courses = new HashSet<>();
 
 
 
@@ -40,7 +45,13 @@ public class Trainer {
 
     }
 
+    public Set<Course> getCourses() {
+        return courses;
+    }
 
+    public void setCourses(Set<Course> courses) {
+        this.courses = courses;
+    }
 
     public long getTrainerID() {
         return trainerID;

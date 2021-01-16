@@ -5,10 +5,10 @@ import javax.persistence.*;
 @Entity
 public class Program {
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long programID;
 
-    private String name;
+    private String progName;
     private String category;
     private String description;
     @ManyToOne
@@ -20,7 +20,7 @@ public class Program {
 
     }
 
-        public long getProgramID() {
+    public long getProgramID() {
         return programID;
     }
 
@@ -28,12 +28,12 @@ public class Program {
         this.programID = programID;
     }
 
-    public String getName() {
-        return name;
+    public String getProgName() {
+        return progName;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setProgName(String name) {
+        this.progName = name;
     }
 
     public String getCategory() {
@@ -60,9 +60,9 @@ public class Program {
         this.trainer = trainer;
     }
 
-    public Program(long programID, String name, String category, String description, Trainer trainer) {
+    public Program(long programID, String progName, String category, String description, Trainer trainer) {
         this.programID = programID;
-        this.name = name;
+        this.progName = progName;
         this.category = category;
         this.description = description;
         this.trainer = trainer;
@@ -72,7 +72,7 @@ public class Program {
     public String toString() {
         return "Program{" +
                 "programID=" + programID +
-                ", name='" + name + '\'' +
+                ", name='" + progName + '\'' +
                 ", category='" + category + '\'' +
                 ", description='" + description + '\'' +
                 ", trainer=" + trainer +

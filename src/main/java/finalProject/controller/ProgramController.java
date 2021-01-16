@@ -13,7 +13,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-@RequestMapping("")
+@CrossOrigin
 @RestController
 public class ProgramController {
 
@@ -39,14 +39,14 @@ public class ProgramController {
         return program;
     }
 
-    @PutMapping("/program/{programID}")
-    public ResponseEntity<Program> updateProgram(@PathVariable(value = "programID")Long programId,
+    @PutMapping("/program")
+    public ResponseEntity<Program> updateProgram(
                                                  @Valid @RequestBody Program programDetails)
         throws ResourceNotFoundException {
-        Program program = programRepository.findById(programId)
-                .orElseThrow(()-> new ResourceNotFoundException("Program not found for this id::"+ programId));
+        Program program = programRepository.findById(programDetails.getProgramID())
+                .orElseThrow(()-> new ResourceNotFoundException("Program not found for this id::"+ programDetails.getProgramID()));
         program.setProgramID(programDetails.getProgramID());
-        program.setName(programDetails.getName());
+        program.setProgName(programDetails.getProgName());
         program.setCategory(programDetails.getCategory());
         program.setDescription(programDetails.getDescription());
         program.setTrainer(programDetails.getTrainer());
