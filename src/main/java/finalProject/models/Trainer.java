@@ -11,17 +11,19 @@ public class Trainer {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
 
-    @Column
+
     private long trainerID;
 
-    @Column
+
     private String name;
-    @Column
+
     private String gym;
-    @Column
+
     private String email;
-    @Column
+
     private long age;
+
+    private String photoFile;
 
     @ManyToMany(mappedBy = "trainerLs")
     private Set<Course> courses = new HashSet<>();
@@ -36,13 +38,25 @@ public class Trainer {
                    String name,
                    String gym,
                    String email,
-                   long age) {
+                   long age,
+                   String photoFile
+                   ) {
         this.age = age;
         this.name = name;
         this.email = email;
         this.trainerID = trainerID;
         this.gym = gym;
+        this.photoFile = photoFile;
 
+
+    }
+
+    public String getPhotoFile() {
+        return photoFile;
+    }
+
+    public void setPhotoFile(String photoFile) {
+        this.photoFile = photoFile;
     }
 
     public Set<Course> getCourses() {
@@ -94,6 +108,16 @@ public class Trainer {
         this.age = age;
     }
 
+    public Trainer(long trainerID, String name, String gym, String email, long age, String photoFile, Set<Course> courses) {
+        this.trainerID = trainerID;
+        this.name = name;
+        this.gym = gym;
+        this.email = email;
+        this.age = age;
+        this.photoFile = photoFile;
+        this.courses = courses;
+    }
+
     @Override
     public String toString() {
         return "Trainer{" +
@@ -102,6 +126,7 @@ public class Trainer {
                 ", gym='" + gym + '\'' +
                 ", email='" + email + '\'' +
                 ", age=" + age +
+                ", courses=" + courses +
                 '}';
     }
 

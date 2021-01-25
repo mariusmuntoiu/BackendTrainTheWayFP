@@ -1,4 +1,4 @@
-package finalProject.services;
+ package finalProject.services;
 
 import finalProject.models.User;
 import finalProject.repository.UserRepository;
@@ -14,7 +14,7 @@ public class UserDetailsImpl implements UserDetailsService {
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        User user = userRepository.getUserByUsername(username);
+        User user = userRepository.findUserByUsername(username);
 
         if(user == null) {
             throw new UsernameNotFoundException("Could not find user");

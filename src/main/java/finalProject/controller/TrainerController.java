@@ -58,6 +58,7 @@ public class TrainerController {
         trainer.setAge(trainerDetails.getAge());
         trainer.setGym(trainerDetails.getGym());
         trainer.setEmail(trainerDetails.getEmail());
+        trainer.setPhotoFile(trainerDetails.getPhotoFile());
         final Trainer updatedTrainer = trainerRepository.save(trainer);
         return ResponseEntity.ok(updatedTrainer);
     }
